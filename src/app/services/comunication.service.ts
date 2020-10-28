@@ -26,7 +26,6 @@ export class ComunicationService {
 	 * la vista del formulario
 	 */
 	public getData(queryParams): Observable<HttpResponse<ServiceResponse>> {
-		console.log(JSON.stringify(environment));
 		return this._client.get<HttpResponse<ServiceResponse>>(`${environment.apiUrl}/sampling/v1/survey`, {
 			params: {
 				access_token: queryParams.accesstoken,
