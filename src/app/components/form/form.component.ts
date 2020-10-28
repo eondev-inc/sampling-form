@@ -12,7 +12,7 @@ declare var jQuery: any;
 @Component({
 	selector: 'app-form',
 	templateUrl: './form.component.html',
-	styleUrls: ['./form.component.css'],
+	styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
 	//Edad de los hijos
@@ -240,6 +240,38 @@ export class FormComponent implements OnInit {
 
 		return email === email2 ? false : true;
 	}
+	get cantidadHijosValido() {
+		if(this.datosBasicos.get('tieneHijo').value === "true") {
+			return (
+				this.edadHijos.length === parseInt(this.datosBasicos.get('cuantosHijos').value) &&
+				parseInt(this.edadHijos.value) !== 0
+			);
+		} else {
+			return true;
+		}
+
+	}
+
+	get cantidadMascotaValido() {
+		if(this.datosBasicos.get('mascota').value === "true"){
+			return (
+				this.tiposMascotas.length === parseInt(this.datosBasicos.get('cuantasMascotas').value) &&
+				parseInt(this.tiposMascotas.value) !== 0
+			);
+		} else {
+			return true;
+		}
+
+	}
+
+	get deportesFrecuenciaValido() {
+		if(this.datosBasicos.get('deportes').value === "true") {
+			return parseInt(this.datosBasicos.get('deporteFrecuencia').value) != 0
+		} else {
+			return true;
+		}
+
+	}
 
 	/***
 	 * En esta seccio se definen un par de GET's para validar el formulario por
@@ -275,8 +307,10 @@ export class FormComponent implements OnInit {
 			this.datosBasicos.get('tieneHijo').valid &&
 			this.datosBasicos.get('cuantosHijos').valid &&
 			this.datosBasicos.get('mascota').valid &&
-			this.tiposMascotas.length >= parseInt(this.datosBasicos.get('cuantasMascotas').value) &&
-			this.edadHijos.length >= parseInt(this.datosBasicos.get('cuantosHijos').value)
+			this.deportesFrecuenciaValido &&
+			this.cantidadMascotaValido &&
+			this.cantidadHijosValido
+
 		);
 	}
 
@@ -298,6 +332,10 @@ export class FormComponent implements OnInit {
 	 * dentro del formulario
 	 */
 	private eventListeners() {
+		this.datosBasicos.get('mascota').valueChanges.subscribe(value => {
+			console.log(typeof value);
+			console.log(typeof this.datosBasicos.get('cuantosHijos').value)
+		})
 		//Se valida que el usuario haya seleccionado solo 3 checkboxes del apartado
 		//REDES
 		this.datosBasicos.get('redes').valueChanges.subscribe((value: any[]) => {
@@ -350,7 +388,9 @@ export class FormComponent implements OnInit {
 				this.datosBasicos.get('proveedorServicio').setValue(0);
 			}
 		});
-
+		/**
+		 * Se verifican
+		 */
 		this.datosBasicos.get('contenido').valueChanges.subscribe((value: any[]) => {
 
 			if (value.length >= 3) {

@@ -3,11 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	production: true,
-	localDev: false,
+	production: false,
 	googleApi: 'AIzaSyDqpl0ozSQ_YzgWHRQ8JhOqKYJRM0UjiKc',
-	apiDevUrl: 'https://qa-api-sampling.izitapp.com/influencers',
-	apiProUrl: 'https://api-sampling.izitapp.com/influencers',
+	apiUrl: 'https://qa-api-sampling.izitapp.com/influencers',
 	apiKey: 'AlgunaApiKeyPorDefinir', //Alguna ApiKey que se pueda definir
 };
 

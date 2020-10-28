@@ -108,7 +108,7 @@
 							name="next"
 							class="next action-button"
 							value="Siguiente"
-							[disabled]="!seccionUnoNoValido"
+							[disabled]="seccionUnoNoValido"
 						/>
 					</fieldset>
 					<!-- Fin de primera Parte-->
@@ -175,7 +175,7 @@
 							name="next"
 							class="next action-button"
 							value="Siguiente"
-							[disabled]="!seccionDosNoValido"
+							[disabled]="seccionDosNoValido"
 						/>
 						<input type="button" name="previous" class="previous action-button-previous" value="Anterior" />
 					</fieldset>
@@ -379,6 +379,7 @@
 									</option>
 								</select>
 							</div>
+							<hr class="hr-text" data-content="o">
 							<!--Contenid que te gusta leer o ver-->
 							<label for="">Que te gusta ver y/o leer: </label> <br />
 							<label for="" *ngIf="contenidoNoValido" class="danger font-weight-bold">Solo puedes seleccionar 3 opciones</label>
@@ -399,7 +400,7 @@
 									</label>
 								</div>
 							</div>
-
+							<hr class="hr-text" data-content="o">
 							<label for="" >Gustos y preferencias </label><br />
 							<label for="" *ngIf="preferenciasNoValido" class="danger font-weight-bold"
 								>Solo puedes seleccionar 3 opciones</label
@@ -424,7 +425,7 @@
 									</label>
 								</div>
 							</div>
-
+							<hr class="hr-text" data-content="o">
 							<label for="">Que plataformas de contenido posee?*</label>
 							<div class="list-group checkbox-list-group">
 								<div class="list-group-item" *ngFor="let data of formData.video_content; let i = index">
@@ -442,7 +443,7 @@
 									</label>
 								</div>
 							</div>
-
+							<hr class="hr-text" data-content="o">
 							<label for="">Redes sociales que más usas</label><br />
 							<label *ngIf="redesNoValido" class="danger font-weight-bold"
 								>Seleccionar los los 3 mas utilizados</label

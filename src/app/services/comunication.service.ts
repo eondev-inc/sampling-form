@@ -6,10 +6,14 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { clean } from 'rut.js';
-import { query } from '@angular/animations';
+
 @Injectable({
 	providedIn: 'root',
 })
+/**
+ * Clase para conexion con los servicios REST y procesamiento del
+ * formulario
+ */
 export class ComunicationService {
 	/**
 	 * Definiocion de variables globales
@@ -22,31 +26,14 @@ export class ComunicationService {
 	 * la vista del formulario
 	 */
 	public getData(queryParams): Observable<HttpResponse<ServiceResponse>> {
-		if (environment.production) {
-			return this._client.get<HttpResponse<ServiceResponse>>(`${environment.apiProUrl}/sampling/v1/survey`, {
-				params: {
-					access_token: queryParams.accesstoken,
-					userId: queryParams.userId,
-					messageId: queryParams.messageId, //'c15a690d1389b9ee2872642dd63ca760b6b37456',
-				},
-			});
-		} else if (!environment.production && environment.localDev) {
-			return this._client.get<HttpResponse<ServiceResponse>>(`sampling/v1/survey`, {
-				params: {
-					access_token: queryParams.accesstoken,
-					userId: queryParams.userId,
-					messageId: queryParams.messageId,
-				},
-			});
-		} else if (!environment.production && !environment.localDev) {
-			return this._client.get<HttpResponse<ServiceResponse>>(`${environment.apiDevUrl}/sampling/v1/survey`, {
-				params: {
-					access_token: queryParams.accesstoken,
-					userId: queryParams.userId,
-					messageId: queryParams.messageId, //'c15a690d1389b9ee2872642dd63ca760b6b37456',
-				},
-			});
-		}
+		console.log(JSON.stringify(environment));
+		return this._client.get<HttpResponse<ServiceResponse>>(`${environment.apiUrl}/sampling/v1/survey`, {
+			params: {
+				access_token: queryParams.accesstoken,
+				userId: queryParams.userId,
+				messageId: queryParams.messageId, //'c15a690d1389b9ee2872642dd63ca760b6b37456',
+			},
+		});
 	}
 
 	/**
@@ -96,18 +83,11 @@ export class ComunicationService {
 			latLon: data.latLon,
 		};
 
-		if (environment.production) {
-			return this._client
-				.post<HttpResponse<RequestSampling>>(`${environment.apiProUrl}/sampling/v1/survey`, reqData, {})
-				.toPromise();
-		} else if (!environment.production && environment.localDev) {
-			return this._client.post<HttpResponse<RequestSampling>>(`sampling/v1/survey`, reqData).toPromise();
-		} else if (!environment.production && !environment.localDev) {
-			console.log('DATA ENVIADA: ' + JSON.stringify(reqData));
-			return this._client
-				.post<HttpResponse<RequestSampling>>(`${environment.apiDevUrl}/sampling/v1/survey`, reqData)
-				.toPromise();
-		}
+		// if (environment.production) {
+		return this._client
+			.post<HttpResponse<RequestSampling>>(`${environment.apiUrl}/sampling/v1/survey`, reqData, {})
+			.toPromise();
+
 	}
 
 	checkForServiceResponse(): boolean {

@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"sampling-izitapp": {
+		"sampling-form-singup": {
 			"projectType": "application",
 			"schematics": {},
 			"root": "",
@@ -13,7 +13,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/sampling-izitapp",
+						"outputPath": "dist/sampling-form-singup",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -51,24 +51,52 @@
 									"maximumError": "10kb"
 								}
 							]
+						},
+						"qa": {
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.qa.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
 						}
 					}
 				},
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "sampling-izitapp:build"
+						"browserTarget": "sampling-form-singup:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "sampling-izitapp:build:production"
+							"browserTarget": "sampling-form-singup:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "sampling-izitapp:build"
+						"browserTarget": "sampling-form-singup:build"
 					}
 				},
 				"test": {
@@ -94,16 +122,16 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "sampling-izitapp:serve"
+						"devServerTarget": "sampling-form-singup:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "sampling-izitapp:serve:production"
+							"devServerTarget": "sampling-form-singup:serve:production"
 						}
 					}
 				}
 			}
 		}
 	},
-	"defaultProject": "sampling-izitapp"
+	"defaultProject": "sampling-form-singup"
 }
